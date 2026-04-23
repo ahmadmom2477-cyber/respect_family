@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Respect Family"
+version = "1.0.0"
+id = "artifacts/respect-family"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25538
+
+[services.development]
+run = "pnpm --filter @workspace/respect-family run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/respect-family", "run", "build" ]
+publicDir = "artifacts/respect-family/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25538"
+BASE_PATH = "/"
